@@ -17,7 +17,6 @@ ylabel('Weight (kg)')
 legend('Males','Females')
 xlim([120 220])
 ylim([30 130])
-axis equal
 
 %% Histogram (males)
 figure(2)
@@ -66,9 +65,9 @@ firstTerm = zeros(2);  % 2x2 matrix of zeros
 for i = 1:length(male)
     firstTerm = firstTerm + male(i,:)'*male(i,:); 
 end
-firstTerm = firstTerm/length(male);
+firstTerm = firstTerm/length(male); 
 secondTerm = mMales.*mMales';
-sigmaMales = firstTerm - secondTerm;
+sigmaMales = firstTerm - secondTerm; % covariance matrix
 
 %% MLE covariance (females).
 firstTerm = zeros(2);  % 2x2 matrix of zeros
