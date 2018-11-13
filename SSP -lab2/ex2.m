@@ -40,25 +40,5 @@ stem(find(uninformativeWords == 0),theta(find(uninformativeWords == 0),2),'marke
 grid on
 title(['Features that differs by at most ', num2str(err)])
 
-%plot(find(unin2),find(unin2),'.')
-%xticks([find(unin)])
-%xticklabels(data.vocab(find(unin)))
-%xtickangle(90)
 legend('Microsoft Windows','X Windows', 'location','best')
 
-% subplots
-% figure(10)
-% subplot(2,1,1)
-% hold on
-% plot(theta(1:end/2,1),'marker','o','color','b','markersize',4)
-% plot(theta(1:end/2,2),'marker','^','markersize',4)
-% unin=(theta(1:end/2,1)==theta(1:end/2,2))
-% plot(find(unin),theta(find(unin)),'kx','markerfacecolor','k','markersize',10)
-%
-% subplot(2,1,2)
-% hold on
-% plot(theta(end/2+1:end,1),'marker','o','color','b','markersize',4)
-% plot(theta(end/2+1:end,2),'marker','^','markersize',4)
-% unin=(theta(end/2+1:end,1)==theta(end/2+1:end,2))
-% plot(find(unin),theta(find(unin)),'kx','markerfacecolor','k','markersize',10)
-%xtickangle(90)
