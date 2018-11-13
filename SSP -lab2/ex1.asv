@@ -1,5 +1,3 @@
-%% forked from Paolo-26
-
 close all; clc; clear;
 data = load('heightWeight.mat');
 
@@ -90,7 +88,7 @@ caxis([min(F(:))-.5*range(F(:)),max(F(:))]);
 axis([120 220 30 130 0 max(F(:))])
 xlabel('Height (cm)'); ylabel('Weight (kg)'); zlabel('Probability Density - males');
 title('Males')
-view(0,90); axis equal; colorbar;
+view(0,90); axis equal;
 
 %% Multivariate gaussian plot (females)
 figure(5)
@@ -103,6 +101,6 @@ caxis([min(F(:))-.5*range(F(:)),max(F(:))]);
 axis([120 220 30 130 0 max(F(:))])
 xlabel('Height (cm)'); ylabel('Weight (kg)'); zlabel('Probability Density - females');
 title('Females')
-view(0,90); axis equal; colorbar;
+colormap parula; view(0,90); axis equal; colorbar;
 
 
