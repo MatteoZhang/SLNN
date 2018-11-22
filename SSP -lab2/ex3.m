@@ -1,4 +1,3 @@
-
 clc; clear; close all;
 data = load('XwindowsDocData.mat')
 
@@ -26,7 +25,7 @@ classesTest = (resTest(:,1) < resTest(:,2))+1;
 acc(1) = sum(classesTrain == data.ytrain)/length(data.ytrain)*100;
 acc(2) = sum(classesTest == data.ytest)/length(data.ytest)*100;
 
-%% Optional part
+% Optional part
 
 for j = 1:length(theta)
     thetaJ = sum(pie(1,:).*theta(j,:));
