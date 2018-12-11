@@ -64,6 +64,7 @@ def train_and_test(_):
 
 	# define the optimizer and what is optimizing
 	optimizer = tf.train.GradientDescentOptimazer(TRAIN_STEPS)
+	train_step = optimizer.minimize(loss)
 
 	# measure accuracy on the batch and make it a summary for tensorboard
 
