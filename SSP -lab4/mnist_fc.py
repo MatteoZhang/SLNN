@@ -11,7 +11,7 @@ FLAGS = None
 NUM_PIXELS = 784
 NUM_CLASSES = 10
 BATCH_SIZE = 100
-TRAIN_STEPS = 0.5
+TRAIN_STEPS = 1
 
 
 def train_and_test(_):
@@ -23,7 +23,7 @@ def train_and_test(_):
 
 	# Import data
 	mnist = input_data.read_data_sets(FLAGS.data_dir, one_hot=True)
-	batch_xs, batch_ys = mnist.train.next_batch(BATCH_SIZE)
+
 
 #################################################################################
 ############################	YOUR CODE HERE   ################################
@@ -34,12 +34,12 @@ def train_and_test(_):
 	y = tf.placeholder(tf.float32, shape=(None, NUM_CLASSES), name='hot_vector')
 
 	# define variables for weights and biases of the three fully connected layers
-	W1 = tf.Variable(tf.truncated_normal(shape=(BATCH_SIZE, NUM_PIXELS), sdtdev=(1/NUM_PIXELS)), name='trainable_weights1')
-	W2 = tf.Variable(tf.truncated_normal(shape=(BATCH_SIZE, 15), sdtdev=(1/NUM_PIXELS)), name='trainable_weights2')
-	W3 = tf.Variable(tf.truncated_normal(shape=(BATCH_SIZE, NUM_CLASSES), sdtdev=(1/NUM_PIXELS)), name='trainable_weights3')
-	b1 = tf.Variable(tf.truncated_normal(shape=NUM_PIXELS, sdtdev=(1/NUM_PIXELS)), name='trainable_bias1')
-	b2 = tf.Variable(tf.truncated_normal(shape=15, sdtdev=(1/NUM_PIXELS)), name='trainable_bias2')
-	b3 = tf.Variable(tf.truncated_normal(shape=NUM_CLASSES, sdtdev=(1/NUM_PIXELS)), name='trainable_bias3')
+	W1 = tf.Variable(tf.truncated_normal(shape=(BATCH_SIZE, NUM_PIXELS), stddev=(1/NUM_PIXELS)), name='trainable_weights1')
+	W2 = tf.Variable(tf.truncated_normal(shape=(BATCH_SIZE, 15), stddev=(1/NUM_PIXELS)), name='trainable_weights2')
+	W3 = tf.Variable(tf.truncated_normal(shape=(BATCH_SIZE, NUM_CLASSES), stddev=(1/NUM_PIXELS)), name='trainable_weights3')
+	b1 = tf.Variable(tf.truncated_normal(shape=NUM_PIXELS, stddev=(1/NUM_PIXELS)), name='trainable_bias1')
+	b2 = tf.Variable(tf.truncated_normal(shape=15, stddev=(1/NUM_PIXELS)), name='trainable_bias2')
+	b3 = tf.Variable(tf.truncated_normal(shape=NUM_CLASSES, stddev=(1/NUM_PIXELS)), name='trainable_bias3')
 
 	# computation graph
 	# linear
@@ -60,26 +60,29 @@ def train_and_test(_):
 	tf.summary.histogram('weights_layer2', W2)
 	tf.summary.histogram('weights_layer3', W3)
 	tf.summary.image('input_images', x)
-	merged = tf.summary.merge_all()
+
 
 	# define the optimizer and what is optimizing
-	optimizer = tf.train.GradientDescentOptimazer(TRAIN_STEPS)
+	optimizer = tf.train.GradientDescentOptimazer(0.5)
 	train_step = optimizer.minimize(loss)
 
 	# measure accuracy on the batch and make it a summary for tensorboard
-
+	accuracy = tf.equal(tf.argmax(y,1), tf.argmax(out3,1))
+	accuracy =
 
 	# create session
-
+	sess = tf.InteractiveSession()
+	tf.global_variables_initializer().run()
 
 	# merge summaries for tensorboard
-
+	merged = tf.summary.merge_all()
 
 	# initialize variables
 
 	
 	# training iterations: fetch training batch and run
-
+	batch_xs, batch_ys = mnist.train.next_batch(BATCH_SIZE)
+	sess.run(train_step, feed_dict={x: batch_xs, y:batch_ys})
 
 	# after training fetch test set and measure accuracy
 
