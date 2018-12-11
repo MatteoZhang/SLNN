@@ -11,7 +11,7 @@ FLAGS = None
 NUM_PIXELS = 784
 NUM_CLASSES = 10
 BATCH_SIZE = 100
-TRAIN_STEPS = 1
+TRAIN_STEPS = 10
 
 
 def train_and_test(_):
@@ -67,24 +67,26 @@ def train_and_test(_):
 	train_step = optimizer.minimize(loss)
 
 	# measure accuracy on the batch and make it a summary for tensorboard
-	accuracy = tf.equal(tf.argmax(y,1), tf.argmax(out3,1))
-	accuracy =
+	correct_prediction = tf.equal(tf.argmax(y,1), tf.argmax(out3,1))
+	accuracy = tf.reduce_mean(tf.cast(correct_prediction, tf.flowa32))
+
 
 	# create session
 	sess = tf.InteractiveSession()
-	tf.global_variables_initializer().run()
+
 
 	# merge summaries for tensorboard
 	merged = tf.summary.merge_all()
 
 	# initialize variables
-
+	tf.global_variables_initializer().run()
 	
 	# training iterations: fetch training batch and run
 	batch_xs, batch_ys = mnist.train.next_batch(BATCH_SIZE)
 	sess.run(train_step, feed_dict={x: batch_xs, y:batch_ys})
 
 	# after training fetch test set and measure accuracy
+	accuracy_value = sess.run(accuracy, feed_dict={x:batch_xs, y:batch_ys})
 
 
 ###################################################################################		
