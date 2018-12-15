@@ -2,8 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="465c1695-fc01-464b-9598-3e4fdb546c43" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/SLNN.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/SLNN.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -14,7 +12,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/SLNN$mnist_fc.coverage" NAME="mnist_fc Coverage Results" MODIFIED="1544533547078" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/SSP -lab4" />
+    <SUITE FILE_PATH="coverage/SLNN$mnist_fc.coverage" NAME="mnist_fc Coverage Results" MODIFIED="1544575273866" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/SSP -lab4" />
   </component>
   <component name="FUSProjectUsageTrigger">
     <session id="896515352">
@@ -55,8 +53,8 @@
       <file leaf-file-name="mnist_fc.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/SSP -lab4/mnist_fc.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="187">
-              <caret line="11" column="16" selection-start-line="11" selection-start-column="16" selection-end-line="11" selection-end-column="16" />
+            <state relative-caret-position="221">
+              <caret line="13" column="16" lean-forward="true" selection-start-line="13" selection-start-column="16" selection-end-line="13" selection-end-column="16" />
               <folding>
                 <element signature="e#0#23#0" expanded="true" />
               </folding>
@@ -179,13 +177,13 @@
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
       <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" />
-      <window_info active="true" anchor="bottom" id="Python Console" order="12" visible="true" weight="0.32849163" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.4885246" />
-      <window_info anchor="bottom" id="Terminal" order="11" weight="0.1852459" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.16044776" />
-      <window_info anchor="right" id="R Packages" />
+      <window_info anchor="bottom" id="Python Console" order="12" weight="0.32849163" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.48826817" />
+      <window_info anchor="bottom" id="Terminal" order="11" weight="0.4480447" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.16364606" />
+      <window_info anchor="right" id="R Packages" order="3" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
-      <window_info anchor="right" id="R Graphics" />
+      <window_info anchor="right" id="R Graphics" order="3" />
       <window_info anchor="right" id="Database" order="4" />
       <window_info anchor="right" id="SciView" order="3" weight="0.12859304" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -210,6 +208,26 @@
     <entry file="file://$PROJECT_DIR$/SSP -lab4/mnist_fc.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="119">
+          <caret line="11" column="16" selection-start-line="11" selection-start-column="16" selection-end-line="11" selection-end-column="16" />
+          <folding>
+            <element signature="e#0#23#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SSP -lab4/mnist_fc.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="11" column="16" selection-start-line="11" selection-start-column="16" selection-end-line="11" selection-end-column="16" />
+          <folding>
+            <element signature="e#0#23#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SSP -lab4/mnist_fc.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
           <caret line="11" column="16" lean-forward="true" selection-start-line="11" selection-start-column="16" selection-end-line="11" selection-end-column="16" />
           <folding>
             <element signature="e#0#23#0" expanded="true" />
@@ -221,8 +239,8 @@
     <entry file="file://$USER_HOME$/AppData/Roaming/Python/Python36/site-packages/numpy/core/__init__.py" />
     <entry file="file://$PROJECT_DIR$/SSP -lab4/mnist_fc.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="11" column="16" selection-start-line="11" selection-start-column="16" selection-end-line="11" selection-end-column="16" />
+        <state relative-caret-position="221">
+          <caret line="13" column="16" lean-forward="true" selection-start-line="13" selection-start-column="16" selection-end-line="13" selection-end-column="16" />
           <folding>
             <element signature="e#0#23#0" expanded="true" />
           </folding>
