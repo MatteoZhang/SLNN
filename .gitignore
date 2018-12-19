@@ -4,3 +4,8 @@
 *.xml
 *.iml
 .idea/workspace.xml
+<<<<<<< HEAD
+=======
+*.xml
+.idea/workspace.xml
+>>>>>>> cb798bdd62ca30b1c72a5032d1849eab26e62c8e
