@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 clc; clear; close all;
 data = load('XwindowsDocData.mat')
 
@@ -26,8 +26,7 @@ classesTest = (resTest(:,1) < resTest(:,2))+1;
 acc(1) = sum(classesTrain == data.ytrain)/length(data.ytrain)*100;
 acc(2) = sum(classesTest == data.ytest)/length(data.ytest)*100;
 
-acc
-=======
+
 clc; clear; close all;
 data = load('XwindowsDocData.mat')
 
@@ -91,13 +90,12 @@ end
 
 figure(1)
 hold on
-plot(acc(:,1)/100,'.-')
-plot(acc(:,2)/100,'.-')
-legend('Training', 'Test', 'location','best')
+plot(acc(:,1)/100)
+plot(acc(:,2)/100)
+legend('Training', 'Test')
 title('Naive Bayes classifier')
 grid on
-grid minor
 xlabel('K')
 ylabel('Accuracy')
 ylim([0 1])
->>>>>>> 5a7784a00fdd835f8a14d636015e3d932f3e2f36
+

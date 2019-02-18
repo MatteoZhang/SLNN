@@ -10,7 +10,7 @@ A2train=A.dataset(1:4323,1:6);
 A2test=A.dataset(4324:end,1:6);
 
 %set K
-K=1:1:1000;
+K=1:1:100;
 point2train=size(A2train,1);
 row2test=size(A2test,1);
 

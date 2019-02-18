@@ -14,31 +14,38 @@ pie(2) = train(2)/length(data.ytrain);
 
 figure(1)
 subplot(2,1,1)
-bar(theta(1:end,1),'k')
+bar(theta(1:end,1))
 title('Microsoft Windows')
 grid minor
 subplot(2,1,2)
-bar(theta(1:end,2),'k')
+bar(theta(1:end,2))
 title('Windows X')
 grid minor
 
 figure(2)
 hold on
-stem(theta(1:end,1), 'marker','o', 'color','b', 'markersize',4)
-stem(theta(1:end,2), 'marker','^', 'markersize',4)
-%uninformative = (theta(1:end,1) == theta(1:end,2));
+stem(theta(1:end,1), 'marker','*', 'color','red', 'markersize',4)
+stem(theta(1:end,2), 'marker','+', 'markersize',4)
 uninformativeWords = (abs(theta(1:end,1)-theta(1:end,2))) <= err;  % error
-%plot(find(unin2),theta(find(unin2)),'kx','markerfacecolor','k','markersize',10)
 grid on
 legend('Microsoft Windows', 'X Windows', 'location','best')
 title('All features')
 
 figure(3)
 hold on
-stem(find(uninformativeWords == 0),theta(find(uninformativeWords == 0),1),'marker','o', 'color','red', 'markersize',4)
-stem(find(uninformativeWords == 0),theta(find(uninformativeWords == 0),2),'marker','^', 'markersize',4)
+stem(find(uninformativeWords == 0),theta(find(uninformativeWords == 0),1),'marker','*', 'color','red', 'markersize',4)
+stem(find(uninformativeWords == 0),theta(find(uninformativeWords == 0),2),'marker','+', 'markersize',4)
 grid on
 title(['Features that differs by at most ', num2str(err)])
 
-legend('Microsoft Windows','X Windows', 'location','best')
+legend('Microsoft Windows','X Windows')
+
+figure(4)
+hold on
+stem(find(uninformativeWords == 0),theta(find(uninformativeWords == 0),1),'marker','*', 'color','red', 'markersize',4)
+stem(find(uninformativeWords == 0),theta(find(uninformativeWords == 0),2),'marker','+', 'markersize',4)
+grid on
+title(['Features that differs by at most ', num2str(err)])
+
+legend('Microsoft Windows','X Windows')
 

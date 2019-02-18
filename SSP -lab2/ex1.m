@@ -34,7 +34,6 @@ legend('Males','Females')
  
 %% Histogram (females)
 figure(3)
-hold on
 edges=30:5:130;
 h1 = histcounts(male(:,2),edges);
 h2 = histcounts(female(:,2),edges);
@@ -51,14 +50,14 @@ mMales = 0;
 for i = 1:length(male)
     mMales = mMales + male(i,:);
 end
-mMales = mMales/length(male);
+mMales = mMales/length(male)
 
 %% MLE mean (females).
 mFemales = 0;
 for i = 1:length(female)
     mFemales = mFemales + female(i,:);
 end
-mFemales = mFemales/length(female);
+mFemales = mFemales/length(female)
 
 %% MLE covariance (males).
 firstTerm = zeros(2);  % 2x2 matrix of zeros
@@ -67,7 +66,7 @@ for i = 1:length(male)
 end
 firstTerm = firstTerm/length(male); 
 secondTerm = mMales.*mMales';
-sigmaMales = firstTerm - secondTerm; % covariance matrix
+sigmaMales = firstTerm - secondTerm % covariance matrix
 
 %% MLE covariance (females).
 firstTerm = zeros(2);  % 2x2 matrix of zeros
@@ -80,7 +79,7 @@ sigmaFemales = firstTerm - secondTerm
 
 %% Multivariate gaussian plot (males)
 figure(4)
-x1 = 120:220; x2 = 30:130;
+x1 = 120:1:220; x2 = 30:1:130;
 [X1,X2] = meshgrid(x1,x2);
 F = mvnpdf([X1(:) X2(:)],mMales,sigmaMales);
 F = reshape(F,length(x2),length(x1));
@@ -89,11 +88,11 @@ caxis([min(F(:))-.5*range(F(:)),max(F(:))]);
 axis([120 220 30 130 0 max(F(:))])
 xlabel('Height (cm)'); ylabel('Weight (kg)'); zlabel('Probability Density - males');
 title('Males')
-view(0,90); axis equal; colorbar;
+view(0,90);colorbar;
 
 %% Multivariate gaussian plot (females)
 figure(5)
-x1 = 120:220; x2 = 30:130;
+x1 = 120:1:220; x2 = 30:1:130;
 [X1,X2] = meshgrid(x1,x2);
 F = mvnpdf([X1(:) X2(:)],mFemales,sigmaFemales);
 F = reshape(F,length(x2),length(x1));
@@ -102,6 +101,30 @@ caxis([min(F(:))-.5*range(F(:)),max(F(:))]);
 axis([120 220 30 130 0 max(F(:))])
 xlabel('Height (cm)'); ylabel('Weight (kg)'); zlabel('Probability Density - females');
 title('Females')
-view(0,90); axis equal; colorbar;
+view(0,90); colorbar;
+
+%% Multivariate gaussian plot (males)
+figure(7)
+x1 = 120:1:220; x2 = 30:1:130;
+[X1,X2] = meshgrid(x1,x2);
+F = mvnpdf([X1(:) X2(:)],mMales,sigmaMales);
+F = reshape(F,length(x2),length(x1));
+surf(x1,x2,F);
+caxis([min(F(:))-.5*range(F(:)),max(F(:))]);
+axis([120 220 30 130 0 max(F(:))])
+view(0,90);colorbar;
+
+%% Multivariate gaussian plot (females)
+hold on
+x1 = 120:1:220; x2 = 30:1:130;
+[X1,X2] = meshgrid(x1,x2);
+F = mvnpdf([X1(:) X2(:)],mFemales,sigmaFemales);
+F = reshape(F,length(x2),length(x1));
+surf(x1,x2,F);
+caxis([min(F(:))-.5*range(F(:)),max(F(:))]);
+axis([120 220 30 130 0 max(F(:))])
+xlabel('Height (cm)'); ylabel('Weight (kg)'); zlabel('Probability Density');
+title('Multivariate of the joint Gaussian')
+view(0,90); colorbar;
 
 

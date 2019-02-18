@@ -1,68 +1,6 @@
-<<<<<<< HEAD
-%% forked from Paolo-26
-
-close all; clc; clear;
-data = load('heightWeight.mat');
-
-F = 40;
-M = 25;
-
-male = data.heightWeightData(data.heightWeightData(:,1) == 1,2:end);
-female = data.heightWeightData(data.heightWeightData(:,1) == 2,2:end);
-
-test_M = male(1:M,:);
-test_F = female(1:F,:);
-train_M = male(M+1:end,:);
-train_F = female(F+1:end,:);
-
-% MLE mean (males).
-mMales = 0;
-for i = 1:length(train_M)
-    mMales = mMales + train_M(i,:);
-end
-mMales = mMales/length(train_M);
-
-% MLE mean (females).
-mFemales = 0;
-for i = 1:length(train_F)
-    mFemales = mFemales + train_F(i,:);
-end
-mFemales = mFemales/length(train_F);
-
-% MLE covariance (males).
-firstTerm = zeros(2);  % 2x2 matrix of zeros
-for i = 1:length(male)
-    firstTerm = firstTerm + male(i,:)'*male(i,:); 
-end
-firstTerm = firstTerm/length(male); 
-secondTerm = mMales.*mMales';
-sigmaMales = firstTerm - secondTerm; % covariance matrix
-
-% MLE covariance (females).
-firstTerm = zeros(2);  % 2x2 matrix of zeros
-for i = 1:length(female)
-    firstTerm = firstTerm + female(i,:)'*female(i,:); 
-end
-firstTerm = firstTerm/length(female);
-secondTerm = mFemales.*mFemales';
-sigmaFemales = firstTerm - secondTerm
-
-pie(1) = 0.5;
-pie(2) = 0.5;
-
-for i = 1:length(train_M(:,1))
-     num = pie(1)*norm(2*pi*sigmaMales)^(1/2)*exp((train_M(i,:)...
-         -mMales)*inv(sigmaMales)*(train_M(i,:)-mMales)') 
-     den1 = pie(1)*norm(2*pi*sigmaMales)^(1/2)*exp((train_M(i,:)...
-         -mMales)*inv(sigmaMales)*(train_M(i,:)-mMales)')
-     den2 = pie(1)*norm(2*pi*sigmaFemales)^(1/2)*exp((train_F(i,:)...
-         -mFemales)*inv(sigmaFemales)*(train_F(i,:)-mFemales)')
-     PosteriorM_train(i) = num/(den1+den2)
-end
-=======
 clear; close all; clc
 
-data = load('heightWeight')
+data = load('heightWeight');
 SPLIT_M = 25
 SPLIT_F = 40
 
@@ -113,14 +51,23 @@ if run == 2
 end
 
 if run == 3  % Shared covariance matrix
+    shared = [trainMales; trainFemales];
+    mS = 0;
+    for i = 1:length(shared)
+        mS = mS + shared(i,:);
+    end
+    mS = mS/length(shared);  % shared mean
+
     firstTerm = zeros(2);  % 2x2 matrix of zeros
     shared = [trainMales; trainFemales];
     for i = 1:length(shared)
         firstTerm = firstTerm + shared(i,:)'*shared(i,:); 
     end
     firstTerm = firstTerm/length(shared);
-    secondTerm = mM.*mM';
-    sM = firstTerm - secondTerm;
+    secondTerm = (mS).*(mS)';
+    sharedSigma = firstTerm - secondTerm;  % shared sigma
+    
+    %sharedSigma = cov([trainFemales; trainMales]);
 end
 
 % MLE covariance (females).
@@ -146,39 +93,58 @@ pie = [(LM-SPLIT_M)/((LM-SPLIT_M)+(LF-SPLIT_F));   %  Males
 x = [testMales; testFemales];
 for i = 1:length(x)
     
-    num = pie(1)*(norm(2*pi*sM)^(-1/2))*...
+    num = pie(1)*(det(2*pi*sM)^(-1/2))*...
         (exp(-1/2*(x(i,:)-mM)*inv(sM)*(x(i,:)-mM)'));
-    den1 = pie(1)*(norm(2*pi*sM)^(-1/2))*...
+    den1 = pie(1)*(det(2*pi*sM)^(-1/2))*...
         (exp(-1/2*(x(i,:)-mM)*inv(sM)*(x(i,:)-mM)')); 
-    den2 = pie(2)*(norm(2*pi*sF)^(-1/2))*...
+    den2 = pie(2)*(det(2*pi*sF)^(-1/2))*...
         (exp(-1/2*(x(i,:)-mF)*inv(sF)*(x(i,:)-mF)'));
     postM(i) = num/(den1+den2);  % Prob. of being male
 end
 
 x = [testMales; testFemales];
 for i = 1:length(x)
-    num = pie(2)*(norm(2*pi*sF)^(-1/2))*...
+    num = pie(2)*(det(2*pi*sF)^(-1/2))*...
         (exp(-1/2*(x(i,:)-mF)*inv(sF)*(x(i,:)-mF)'));
-    den1 = pie(1)*(norm(2*pi*sM)^(-1/2))*...
+    den1 = pie(1)*(det(2*pi*sM)^(-1/2))*...
         (exp(-1/2*(x(i,:)-mM)*inv(sM)*(x(i,:)-mM)'));   
-    den2 = pie(2)*(norm(2*pi*sF)^(-1/2))*...
+    den2 = pie(2)*(det(2*pi*sF)^(-1/2))*...
         (exp(-1/2*(x(i,:)-mF)*inv(sF)*(x(i,:)-mF)')); 
     postF(i) = num/(den1+den2);  % Prob. of being female
 end
 
+if run == 1 || run == 2
 classified(run) = (sum(postM(1:SPLIT_M) > postF(1:SPLIT_M))...
                 + sum(postM(SPLIT_M+1:end) < postF(SPLIT_M+1:end)))...
                 / (SPLIT_M+SPLIT_F);
+            
+display(['Accuracy ', num2str(run),': ',...
+        num2str(classified(run)*100), ' %'])
+end
 
+
+
+if run == 3
+   sharedTest = [testFemales; testMales];
+   w = inv(sharedSigma)*(mM-mF)' ;
+   x0 = 0.5*(mM+mF)';
+   classified = sign(w'*([testFemales; testMales]-x0')');
+   class = (sum(classified(1:length(testFemales))==-1)+...
+            sum(classified(length(testFemales)+1:end)==1))...
+            /length(sharedTest);
+   display(['Accuracy ', num2str(run),': ',...
+        num2str(class*100), ' %'])
+    
+end
 end
 
 %% GRAPH
 
 figure(1)
-scatter(testMales(:,1),testMales(:,2),100, '.')
+scatter(testMales(:,1),testMales(:,2))
 hold on
-grid minor
-scatter(testFemales(:,1),testFemales(:,2),100, '.')
+grid on
+scatter(testFemales(:,1),testFemales(:,2))
 M = (mean(testMales));
 %scatter(M(1),M(2),100, 'kx')
 F = (mean(testFemales));
@@ -188,5 +154,4 @@ MF = mean([M; F]);
 axis equal
 xlabel('Height')
 ylabel('Weight')
-legend('Males', 'Females', 'location','best')
->>>>>>> 5a7784a00fdd835f8a14d636015e3d932f3e2f36
+legend('Males', 'Females')

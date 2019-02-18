@@ -2,8 +2,8 @@ clear; clc; close all;
 data = load('localization.mat');
 train = data.traindata;
 test = data.testdata;
-N_CELL = size(data.testdata,3);
-rangeK = 1:120;
+N_CELL = size(data.testdata,3); %24
+rangeK = 1:120; %24 cells times 5 measurament
 matrixClass = [-1 -1 -1 -1 -1 -1; -1 1 2 3 4 -1; -1 5 6 7 8 -1;...
                -1 9 10 11 12 -1; -1 13 14 15 16 -1; -1 17 18 19 20 -1;...
                -1 21 22 23 24 -1; -1 -1 -1 -1 -1 -1];
@@ -13,7 +13,6 @@ testError = zeros(1,120);
 trainErrorAdj = zeros(1,120);
 testErrorAdj = zeros(1,120);
 for run = 1:2
-   
     for k = rangeK
         accuracy = zeros(1,24);
         for c = 1:24
@@ -121,12 +120,19 @@ end
 figure(1)
 hold on
 grid on
-grid minor
-plot(trainError, '.-')
-plot(testError, '.-')
-plot(trainErrorAdj, '.:', 'color', [0.3010, 0.7450, 0.9330])
-plot(testErrorAdj, '.:', 'color', [0.6350, 0.0780, 0.1840])
-legend('Training set', 'Test set', 'Training set (adjacent cells)', 'Test set (adjacent cells)', 'location','southeast')
-xlabel('Number of neighbours k')
-ylabel('Misclassification rate')
+plot(trainError)
+plot(testError)
+legend('Training set', 'Test set')
+xlabel('K')
+ylabel('Error Rate')
 title('k-NN classifier')
+
+figure(2)
+hold on
+grid on
+plot(trainErrorAdj)
+plot(testErrorAdj)
+legend('Training set', 'Test set')
+xlabel('K')
+ylabel('Error Rate')
+title('k-NN classifier considering also neighboring cells')
