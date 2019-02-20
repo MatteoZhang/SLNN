@@ -96,3 +96,5 @@ if __name__ == '__main__':
     FLAGS, unparsed = parser.parse_known_args()
     # app.run is a simple wrapper that parses flags and sends them to main function
     tf.app.run(main=train_and_test, argv=[sys.argv[0]] + unparsed)
+
+##python -m tensorboard.main --logdir=log_dir --host 127.0.0.1
